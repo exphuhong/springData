@@ -1,5 +1,7 @@
 package com.IFox.springData;
 
+import com.IFox.dao.PersonRepository;
+import com.IFox.entity.Person;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,6 +20,13 @@ public class SpringDataTest {
         context = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 
+
+    @Test
+    public void testPersonRepository() {
+        PersonRepository personRepository = context.getBean(PersonRepository.class);
+        Person person = personRepository.getByName("huhong");
+        System.out.println(person);
+    }
 
     @Test
     public void testEntityManager() {
