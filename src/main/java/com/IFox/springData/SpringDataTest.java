@@ -18,6 +18,12 @@ public class SpringDataTest {
         context = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 
+
+    @Test
+    public void testEntityManager() {
+
+    }
+
     @Test
     public void test() {
         DataSource dataSource =  context.getBean(DataSource.class);
