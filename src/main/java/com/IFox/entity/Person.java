@@ -1,9 +1,6 @@
 package com.IFox.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
@@ -19,6 +16,17 @@ public class Person {
 
     private String email;
     private LocalDate date;
+    private Address address;
+
+    @JoinColumn(name = "ADDRESS_ID")
+    @ManyToOne
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     @GeneratedValue
     @Id
@@ -61,6 +69,7 @@ public class Person {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", date=" + date +
+                ", address=" + address +
                 '}';
     }
 }

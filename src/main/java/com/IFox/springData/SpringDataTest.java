@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by exphuhong
@@ -20,6 +21,12 @@ public class SpringDataTest {
         context = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 
+    @Test
+    public void testKeyWords() {
+        PersonRepository personRepository = context.getBean(PersonRepository.class);
+        List<Person> persons = personRepository.getByAddress_Id(1);
+        System.out.println(persons.get(0).toString());
+    }
 
     @Test
     public void testPersonRepository() {
