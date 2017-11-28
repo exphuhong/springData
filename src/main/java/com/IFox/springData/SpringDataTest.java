@@ -20,11 +20,30 @@ public class SpringDataTest {
     {
         context = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
+    @Test
+    public void testQueryAnnotation2() {
+        PersonRepository personRepository = context.getBean(PersonRepository.class);
+        Person maxIdPerson = personRepository.testQueryAnnotationParam2("huhong@163.com","huhong");
+        System.out.println(maxIdPerson);
+    }
+
+    @Test
+    public void testQueryAnnotation() {
+        PersonRepository personRepository = context.getBean(PersonRepository.class);
+        Person maxIdPerson = personRepository.testQueryAnnotationParam1("huhong","huhong@163.com");
+        System.out.println(maxIdPerson);
+    }
+    @Test
+    public void testMaxIdPerson() {
+        PersonRepository personRepository = context.getBean(PersonRepository.class);
+        Person maxIdPerson = personRepository.getMaxIdPerson();
+        System.out.println(maxIdPerson);
+    }
 
     @Test
     public void testKeyWords() {
         PersonRepository personRepository = context.getBean(PersonRepository.class);
-        List<Person> persons = personRepository.getByAddress_Id(1);
+        List<Person> persons = personRepository.getByAddressId(1);
         System.out.println(persons.get(0).toString());
     }
 

@@ -1,8 +1,9 @@
 package com.IFox.dao;
 
 import com.IFox.entity.Person;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
-import org.springframework.data.repository.RepositoryDefinition;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -34,6 +35,18 @@ public interface PersonRepository extends Repository<Person, Integer> {
     Person getByName(String name);
 
     //级联查询
-    List<Person> getByAddress_Id(Integer id);
+    List<Person> getByAddressId(Integer id);
+
+    //查询id值最大的Person
+    @Query(value = "SELECT p from Person p Where p.id = (Select max(p2.id) from Person p2)")
+    Person getMaxIdPerson();
+
+    //使用@Query注解传递参数:使用占位符
+    @Query(value = "select p from Person p where p.name=?1 AND p.email=?2")
+    Person testQueryAnnotationParam1(String name,String email);
+
+    //使用@Query注解传递参数:使用@Param
+    @Query(value = "select p from Person p where p.name= :name AND p.email= :email")
+    Person testQueryAnnotationParam2(@Param("email")String email,@Param("name")String name);
 
 }
