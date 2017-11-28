@@ -1,5 +1,6 @@
 package com.IFox.springData;
 
+import com.IFox.Service.PersonService;
 import com.IFox.dao.PersonRepository;
 import com.IFox.entity.Person;
 import org.junit.Test;
@@ -19,6 +20,19 @@ public class SpringDataTest {
     private ApplicationContext context = null;
     {
         context = new ClassPathXmlApplicationContext("applicationContext.xml");
+    }
+
+    @Test
+    public void testUpdate(){
+        PersonService personService = context.getBean(PersonService.class);
+        personService.updateName(1,"cs-hh");
+    }
+
+    @Test
+    public void testNativeSql(){
+        PersonRepository personRepository = context.getBean(PersonRepository.class);
+        long count = personRepository.getTotalCount();
+        System.out.println(count);
     }
     @Test
     public void testQueryAnnotation2() {

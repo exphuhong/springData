@@ -1,6 +1,7 @@
 package com.IFox.dao;
 
 import com.IFox.entity.Person;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
@@ -49,4 +50,10 @@ public interface PersonRepository extends Repository<Person, Integer> {
     @Query(value = "select p from Person p where p.name= :name AND p.email= :email")
     Person testQueryAnnotationParam2(@Param("email")String email,@Param("name")String name);
 
+    @Query(value = "SELECT count(id) from JPA_PERSON ",nativeQuery = true)
+    long getTotalCount();
+
+    @Modifying
+    @Query(value = "update Person p set p.name = :name where id = :id")
+    void updataName(@Param("id") Integer id,@Param("name") String name);
 }
